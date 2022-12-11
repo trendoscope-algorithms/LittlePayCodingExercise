@@ -1,5 +1,7 @@
 # LittlePayCodingExercise
 
+[![CodeFactor](https://www.codefactor.io/repository/github/trendoscope-algorithms/littlepaycodingexercise/badge)](https://www.codefactor.io/repository/github/trendoscope-algorithms/littlepaycodingexercise)
+
 ## How the hypothetical system works
 
 Before boarding a bus at a bus stop, passengers tap their credit card (identified by the PAN, or Primary Account
