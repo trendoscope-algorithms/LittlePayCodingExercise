@@ -1,0 +1,32 @@
+{
+  "Stop1" : [
+    {
+      "destinationStation" : "Stop2",
+      "price" : 3.25
+    },
+    {
+      "destinationStation" : "Stop3",
+      "price" : 7.3
+    }
+  ],
+  "Stop2" : [
+    {
+      "destinationStation" : "Stop1",
+      "price" : 3.25
+    },
+    {
+      "destinationStation" : "Stop3",
+      "price" : 5.50
+    }
+  ],
+  "Stop3" : [
+    {
+      "destinationStation" : "Stop1",
+      "price" : 7.3
+    },
+    {
+      "destinationStation" : "Stop2",
+      "price" : 5.50
+    }
+  ]
+}
