@@ -60,3 +60,38 @@ Status
 22-01-2018 13:00:00, 22-01-2018 13:05:00, 900, Stop1, Stop2, $3.25, Company1, B37,
 5500005555555559, COMPLETED
 ```
+
+## Assumptions
+* Input data is expected to be curated and in the expected format. Code does not handle invalid data
+* Trip is considered to be complete only if it contains consecutive taps of the given PAN are ON followed by OFF and both belong to same BusId, CompanyId
+* If 2nd Tap is not OFF or does not belong to same Bus, Company, then it is considered to be on a different bus. Hence, previous tap ON will be charged full fee.
+* Any tap which starts with OFF where no matching ON is present is considered an orphan tap and is charged full fee.
+* Time difference between taps are not considered when checking the cancelled trip
+
+## Usage
+
+### Compile and build
+
+Run following command to build
+```
+mvn clean package
+```
+
+This command will generate **target/LittlePay.jar** executable
+
+### Test and Report
+Run below commands for unit tests and generate report
+
+```
+mvn clean test
+mvn jacoco:report 
+```
+
+Coverage report can be viewed in **/target/site/jacoco/index.html**
+
+### Run the code
+
+Below commands can be used for run the executables once code is compiled and built.
+```
+java -jar target/LittlePay.jar <path-to-input-csv> <path-to-output-csv>
+```

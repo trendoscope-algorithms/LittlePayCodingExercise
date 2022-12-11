@@ -15,22 +15,34 @@ import java.util.List;
 import java.util.Map;
 
 public class DataReader {
+    private static DataReader instance;
     private static Map<String, List<Destination>> distanceMatrix;
     private static final String PRICE_FILE = "prices.json";
 
+    private DataReader(){
+
+    }
+
+    public static DataReader getInstance(){
+        if(instance == null){
+            instance = new DataReader();
+        }
+        return instance;
+    }
+
     @SuppressWarnings("unchecked")
-    public static Map<String, List<Destination>> getDistanceMatrix() throws IOException, URISyntaxException {
+    public Map<String, List<Destination>> getDistanceMatrix() throws IOException, URISyntaxException {
         if(distanceMatrix == null){
             Gson gson = new Gson();
-            URL resource = DataReader.class.getClassLoader().getResource(PRICE_FILE);
-            Reader reader = new java.io.FileReader(new File(resource.toURI()));
+            InputStream resource = DataReader.class.getClassLoader().getResourceAsStream(PRICE_FILE);
+            Reader reader = new InputStreamReader(resource);
             Type distanceMapType = new TypeToken<Map<String, List<Destination>>>() {}.getType();
             distanceMatrix= gson.fromJson(reader, distanceMapType);
         }
         return distanceMatrix;
     }
 
-    public static List<Tap> readTaps(String fileName) throws FileNotFoundException {
+    public List<Tap> readTaps(String fileName) throws FileNotFoundException {
         FileReader reader = new FileReader(fileName);
         CSVReader csvReader = new CSVReader(reader);
         return new CsvToBeanBuilder<Tap>(csvReader)

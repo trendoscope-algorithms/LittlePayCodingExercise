@@ -13,7 +13,7 @@ public class Processor {
     private Map<String, List<Destination>> distances;
 
     public Processor() throws IOException, URISyntaxException {
-        distances = DataReader.getDistanceMatrix();
+        distances = DataReader.getInstance().getDistanceMatrix();
     }
     public List<Trip> process(List<Tap> taps){
         List<Trip> trips = new ArrayList<>();

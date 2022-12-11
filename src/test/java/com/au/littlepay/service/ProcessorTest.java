@@ -16,14 +16,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProcessorTest {
     private Processor processor;
+    private DataReader reader;
     @BeforeEach
     void init() throws IOException, URISyntaxException {
         processor = new Processor();
+        reader = DataReader.getInstance();
     }
     @Test
     void process() throws FileNotFoundException {
         URL resource = ProcessorTest.class.getClassLoader().getResource("input/test1.csv");
-        List<Tap> taps = DataReader.readTaps(resource.getPath());
+        List<Tap> taps = reader.readTaps(resource.getPath());
         List<Trip> trips = processor.process(taps);
         assertEquals(trips.size(), 4);
     }
@@ -31,7 +33,7 @@ class ProcessorTest {
     @Test
     void processInconsistentTaps() throws FileNotFoundException {
         URL resource = ProcessorTest.class.getClassLoader().getResource("input/test2.csv");
-        List<Tap> taps = DataReader.readTaps(resource.getPath());
+        List<Tap> taps = reader.readTaps(resource.getPath());
         List<Trip> trips = processor.process(taps);
         assertEquals(trips.size(), 7);
     }

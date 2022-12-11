@@ -2,6 +2,9 @@ package com.au.littlepay.data.output;
 
 import com.au.littlepay.data.input.Tap;
 import com.au.littlepay.data.pricing.Destination;
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvBindByPosition;
+import com.opencsv.bean.CsvCustomBindByPosition;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -20,15 +23,35 @@ public class Trip {
         INCOMPLETE,
         CANCELLED
     }
+    @CsvBindByPosition(position = 0)
+    @CsvBindByName(column = "Started")
     private LocalDateTime started;
+    @CsvBindByPosition(position = 1)
+    @CsvBindByName(column = "Finished")
     private LocalDateTime finished;
+    @CsvBindByPosition(position = 2)
+    @CsvBindByName(column = "DurationSecs")
     private Long durationSeconds;
+    @CsvBindByPosition(position = 3)
+    @CsvBindByName(column = "FromStopId")
     private String fromStopId;
+    @CsvBindByPosition(position = 4)
+    @CsvBindByName(column = "ToStopId")
     private String toStopId;
+    @CsvBindByPosition(position = 5)
+    @CsvBindByName(column = "ChargeAmount")
     private Double chargeAmount;
+    @CsvBindByPosition(position = 6)
+    @CsvBindByName(column = "CompanyId")
     private String companyId;
+    @CsvBindByPosition(position = 7)
+    @CsvBindByName(column = "BusID")
     private String busId;
+    @CsvBindByPosition(position = 8)
+    @CsvBindByName(column = "PAN")
     private String pan;
+    @CsvBindByPosition(position = 9)
+    @CsvBindByName(column = "Status")
     private Status status;
 
     public Trip(Tap source, Tap destination, List<Destination> destinationPrices){
@@ -56,7 +79,7 @@ public class Trip {
 
     private Double getMaxPrice(List<Destination> destinationPrices){
         return destinationPrices.stream()
-                .mapToDouble(destination -> destination.getPrice())
+                .mapToDouble(Destination::getPrice)
                 .max().getAsDouble();
     }
 

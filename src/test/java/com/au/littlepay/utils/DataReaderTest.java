@@ -12,10 +12,11 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 class DataReaderTest {
 
+    DataReader reader = DataReader.getInstance();
     @Test
     void getDistanceMatrix() throws IOException, URISyntaxException {
-        Map<String, List<Destination>> distanceMatrix1 = DataReader.getDistanceMatrix();
-        Map<String, List<Destination>> distanceMatrix2 = DataReader.getDistanceMatrix();
+        Map<String, List<Destination>> distanceMatrix1 = reader.getDistanceMatrix();
+        Map<String, List<Destination>> distanceMatrix2 = reader.getDistanceMatrix();
         assertNotNull(distanceMatrix1);
         assertEquals(distanceMatrix1, distanceMatrix2);
         assertEquals(distanceMatrix1.hashCode(), distanceMatrix2.hashCode());
@@ -24,7 +25,6 @@ class DataReaderTest {
 
     @Test
     void readTapsFileNotFound() throws FileNotFoundException {
-        DataReader reader = new DataReader();
         assertThrows(FileNotFoundException.class, ()->{
             reader.readTaps("input/taps2.csv");
         }, "Expected result input file not found");
@@ -33,7 +33,7 @@ class DataReaderTest {
     @Test
     void readTapsValidFile() throws FileNotFoundException {
         assertDoesNotThrow(()->{
-            DataReader.readTaps("input/taps.csv");
+            reader.readTaps("input/taps.csv");
         }, "Expected result File Present and no error thrown");
     }
 }
