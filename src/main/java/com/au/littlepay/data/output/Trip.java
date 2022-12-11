@@ -58,11 +58,11 @@ public class Trip {
         started = source.getDateTimeUTC();
         finished = destination.getDateTimeUTC();
         durationSeconds = finished.toEpochSecond(ZoneOffset.UTC)-started.toEpochSecond(ZoneOffset.UTC);
-        fromStopId = source.getStopId();
-        toStopId = destination.getStopId();
-        companyId = source.getCompanyId();
-        busId = source.getBusId();
-        pan = source.getPan();
+        fromStopId = source.getStopId().trim();
+        toStopId = destination.getStopId().trim();
+        companyId = source.getCompanyId().trim();
+        busId = source.getBusId().trim();
+        pan = source.getPan().trim();
         chargeAmount = fromStopId.trim().equals(toStopId.trim())? 0.0 : getPrice(destinationPrices, destination);
         status = fromStopId.trim().equals(toStopId.trim())? Status.CANCELLED : Status.COMPLETED;
     }
